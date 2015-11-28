@@ -21,6 +21,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    //跳转到注册页
     @RequestMapping("/goto")
     public String toAddPage(){
         return "addpage";
@@ -35,11 +36,13 @@ public class UserController {
         return "fail";
     }
 
+    //跳转到登录页
     @RequestMapping("/tologinpage")
     public String toLoginPage(){
         return "login";
     }
 
+    //登录页
     @RequestMapping("/login")
     public ModelAndView login(User user){
         user = userService.login(user);
