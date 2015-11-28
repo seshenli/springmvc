@@ -19,4 +19,8 @@ public class UserManagerImpl implements UserManager {
     public boolean addUser(User user) {
         return userMapper.insertSelective(user) == 1;
     }
+
+    public User login(User user) {
+        return userMapper.selectByUserName(user);
+    }
 }

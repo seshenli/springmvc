@@ -17,4 +17,13 @@ public class UserServiceImpl implements UserService {
     public boolean register(User user) {
         return userManager.addUser(user);
     }
+
+    public User login(User user) {
+        User resultUser = userManager.login(user);
+        if (resultUser != null && user.getPassword().equals(resultUser.getPassword())){
+            return resultUser;
+        } else {
+            return null;
+        }
+    }
 }

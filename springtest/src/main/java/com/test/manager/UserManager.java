@@ -8,4 +8,6 @@ import com.test.model.User;
  */
 public interface UserManager {
    boolean addUser(User user);
+
+   User login(User user);
 }

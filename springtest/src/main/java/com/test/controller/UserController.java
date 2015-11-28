@@ -5,6 +5,7 @@ import com.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,12 +27,28 @@ public class UserController {
     }
 
     @RequestMapping("/register")
-    public void addUser(User user, HttpServletResponse httpServletResponse) throws IOException {
+    public String addUser(User user) throws IOException {
         boolean result = userService.register(user);
         if (result){
-            httpServletResponse.getWriter().print("success");
+            return "login";
+        }
+        return "fail";
+    }
+
+    @RequestMapping("/tologinpage")
+    public String toLoginPage(){
+        return "login";
+    }
+
+    @RequestMapping("/login")
+    public ModelAndView login(User user){
+        user = userService.login(user);
+        if (user == null){
+            return new ModelAndView("fail");
         } else {
-            httpServletResponse.getWriter().print("failed");
+            ModelAndView modelAndView = new ModelAndView("success");
+            modelAndView.addObject("user" ,user);
+            return modelAndView;
         }
     }
 }
